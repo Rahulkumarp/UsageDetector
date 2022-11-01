@@ -1,6 +1,7 @@
 # UsageDetector
 
 Usage Detector Library
+- To Detect your Application usage you can use this library and get the all information related to CPU usage and memory usage.
 
 > Step 1. Add the Jitpack repository to your build file
 
