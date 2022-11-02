@@ -6,6 +6,7 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.util.Log
 import com.example.usagedetector.`interface`.AppMetric
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.PrintWriter
@@ -29,13 +30,14 @@ class BetterUsageExporter(private val context: Context) : AppMetric {
             ifilter -> context.registerReceiver(null, ifilter)!!
         }
 
-        val status : Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, INVALIDATE_VALUE) ?: INVALIDATE_VALUE
+        val status : Int = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, INVALIDATE_VALUE)
 
-        if(status != INVALIDATE_VALUE){
+        if(status != INVALIDATE_VALUE) {
             batteryPw.println("$status")
-            Log.d("BATTERY", status.toString())
+            Timber.tag("BATTERY").d(status.toString())
         }
     }
+
 
     override fun close() {
        batteryPw.close()
