@@ -1,11 +1,11 @@
-package com.example.usagedetector.usage
+package com.example.usage.usage
 
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.util.Log
-import com.example.usagedetector.`interface`.AppMetric
+import com.example.usage.`interface`.AppMetric
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream

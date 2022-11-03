@@ -1,10 +1,10 @@
-package com.example.usagedetector
+package com.example.usage
 
 import android.content.Context
-import com.example.usagedetector.usage.BetterUsageExporter
-import com.example.usagedetector.usage.CPUUsageExporter
-import com.example.usagedetector.usage.MemoryUsageExporter
-import com.example.usagedetector.usage.NetworkUsageExporter
+import com.example.usage.usage.BetterUsageExporter
+import com.example.usage.usage.CPUUsageExporter
+import com.example.usage.usage.MemoryUsageExporter
+import com.example.usage.usage.NetworkUsageExporter
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import timber.log.Timber

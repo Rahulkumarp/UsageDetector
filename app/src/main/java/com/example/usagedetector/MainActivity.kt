@@ -8,6 +8,7 @@ import android.os.Debug
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.usage.AppMetricExporter
 import java.io.File
 import java.io.IOException
 import java.io.InputStream

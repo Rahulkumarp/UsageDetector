@@ -1,4 +1,4 @@
-package com.example.usagedetector.`interface`
+package com.example.usage.`interface`
 
 interface AppMetric {
     fun export()
