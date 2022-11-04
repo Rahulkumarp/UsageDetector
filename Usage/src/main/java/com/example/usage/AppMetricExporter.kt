@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-open class AppMetricExporter(context: Context) {
+open class AppMetricExporter(context: Context, var screenName : String, var buttonName : String) {
 
     private companion object {
         const val INTERVAL_TIME_IN_SEC = 10L
@@ -26,7 +26,7 @@ open class AppMetricExporter(context: Context) {
 
     fun startCollect() {
         disposable = Observable.interval(INITIAL_DELAY, INTERVAL_TIME_IN_SEC, TimeUnit.SECONDS)
-            .subscribe({ exporters.forEach{ it.export()}},{th ->
+            .subscribe({ exporters.forEach{ it.export(screenName,buttonName)}},{th ->
                 Timber.e(th)})
             }
 

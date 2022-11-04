@@ -26,7 +26,7 @@ class MemoryUsageExporter(context: Context) : AppMetric {
         FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true),
         true)
 
-    override fun export() {
+    override fun export(screenName: String, buttonName: String) {
        val runtime = Runtime.getRuntime()
         val maxHeapSizeInMB = convertInMBOnlyNumber(runtime.maxMemory())
         val availHeapSizeInMB = convertInMBOnlyNumber(runtime.freeMemory())
@@ -45,7 +45,7 @@ class MemoryUsageExporter(context: Context) : AppMetric {
             }
         }
 
-        val str = "Used Heap size - $usedHeapSizeInMB Avail Heap size - $availHeapSizeInMB Max Heap Size - $maxHeapSizeInMB " +
+        val str = "Screen Name $screenName \n Button Clicked $buttonName Used Heap size - $usedHeapSizeInMB Avail Heap size - $availHeapSizeInMB Max Heap Size - $maxHeapSizeInMB " +
                 "Used Native Memory -  $usedNativeMemoryInMB Avail Native Memory  Free - $availNativeMemoryFreeSize Total Native Memory - $totalNativeMemorySize "
 
         memPw.println(str)

@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener{
 
-            AppMetricExporter(this).startCollect()
+            AppMetricExporter(this,"MainActivity screen","hello button").startCollect()
             getRAMInfo()
 
             getMemoryInfo()

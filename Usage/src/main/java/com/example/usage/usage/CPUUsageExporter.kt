@@ -23,10 +23,10 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
 
 
-    override fun export() {
+    override fun export(screenName: String, buttonName: String) {
 
         try {
-            recordCpu()
+            recordCpu(screenName,buttonName)
         } catch (th: Throwable) {
 
         }
@@ -38,7 +38,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
     }
 
 
-    fun recordCpu() {
+    fun recordCpu(screenName: String, buttonName: String) {
 //        val processLine = readSystemFile("top","-n","1")
 //            .flatMap { it.split(" ") }
 //            .map ( String::trim )
@@ -64,6 +64,9 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 //            check(index > -1){
 //                "Not Found process state of $PACKAGE_NAME"
 //            }
+
+        cpuPw.println("Screen Name $screenName \n" +
+                " Button Clicked $buttonName")
 
         for(element in processLine) {
             cpuPw.println(element)
