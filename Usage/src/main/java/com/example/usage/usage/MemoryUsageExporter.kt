@@ -4,13 +4,13 @@ import android.content.Context
 import android.os.Debug
 import android.util.Log
 import com.example.usage.`interface`.AppMetric
-import java.io.File
-import java.io.FileOutputStream
+import com.example.usage.utils.Utils
+import java.io.OutputStream
 import java.io.PrintWriter
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
 
-class MemoryUsageExporter(context: Context) : AppMetric {
+open class MemoryUsageExporter(var context: Context) : AppMetric {
 
 
     private companion object{
@@ -20,11 +20,14 @@ class MemoryUsageExporter(context: Context) : AppMetric {
         const val CRITICAL_MEMORY_LOADING = 0.9
     }
 
-    private val absolutePath = context.filesDir.absolutePath
+      private val absolutePath = context.filesDir.absolutePath
 
-    private val memPw = PrintWriter(
-        FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true),
-        true)
+
+    lateinit var outputStrem : OutputStream
+  //  private val memPw = PrintWriter(FileOutputStream(mydir, true), true)
+  //  private val memPw = PrintWriter(FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true), true)
+  lateinit var memPw : PrintWriter
+  ///    FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true), true)
 
     override fun export(screenName: String, buttonName: String) {
        val runtime = Runtime.getRuntime()
@@ -45,7 +48,7 @@ class MemoryUsageExporter(context: Context) : AppMetric {
             }
         }
 
-        val str = "Screen Name $screenName \n Button Clicked $buttonName Used Heap size - $usedHeapSizeInMB Avail Heap size - $availHeapSizeInMB Max Heap Size - $maxHeapSizeInMB " +
+        val str = "Screen Name $screenName \n Button Clicked $buttonName ${Utils.getDate()} \n Used Heap size - $usedHeapSizeInMB Avail Heap size - $availHeapSizeInMB Max Heap Size - $maxHeapSizeInMB " +
                 "Used Native Memory -  $usedNativeMemoryInMB Avail Native Memory  Free - $availNativeMemoryFreeSize Total Native Memory - $totalNativeMemorySize "
 
         memPw.println(str)
@@ -60,6 +63,13 @@ class MemoryUsageExporter(context: Context) : AppMetric {
 
     override fun close() {
         memPw.close()
+    }
+
+    override fun setPath() {
+        outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"txt")
+        if(outputStrem!=null)
+        memPw = PrintWriter(outputStrem, true)
+
     }
 
     fun convertInMBOnlyNumber(bytes: Long): Long? {

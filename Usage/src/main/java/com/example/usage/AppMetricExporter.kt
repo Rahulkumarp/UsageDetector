@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 open class AppMetricExporter(context: Context, var screenName : String, var buttonName : String) {
 
     private companion object {
-        const val INTERVAL_TIME_IN_SEC = 10L
+        const val INTERVAL_TIME_IN_SEC = 20L
         const val INITIAL_DELAY = 0L
     }
 
@@ -25,6 +25,7 @@ open class AppMetricExporter(context: Context, var screenName : String, var butt
     private var disposable: Disposable? = null
 
     fun startCollect() {
+        createPathForFile()
         disposable = Observable.interval(INITIAL_DELAY, INTERVAL_TIME_IN_SEC, TimeUnit.SECONDS)
             .subscribe({ exporters.forEach{ it.export(screenName,buttonName)}},{th ->
                 Timber.e(th)})
@@ -34,6 +35,11 @@ open class AppMetricExporter(context: Context, var screenName : String, var butt
         exporters.forEach { it.close() }
         disposable?.dispose()
         disposable = null
+    }
+
+    fun createPathForFile()
+    {
+        exporters.forEach { it.setPath() }
     }
 
 

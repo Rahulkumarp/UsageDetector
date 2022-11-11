@@ -1,10 +1,13 @@
 package com.example.usagedetector
 
+import android.Manifest
 import android.app.ActivityManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Debug
+import android.provider.Settings
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +31,22 @@ class MainActivity : AppCompatActivity() {
         Log.d("CPU", getCPUDetails().toString())
         getRAMInfo()
 
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(this)) {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ), 2909
+                )
+            } else {
+                // continue with your code
+            }
+        } else {
+            // continue with your code
+        }
+
         button.setOnClickListener{
 
             AppMetricExporter(this,"MainActivity screen","hello button").startCollect()
@@ -38,6 +57,8 @@ class MainActivity : AppCompatActivity() {
             getApkSize(this)
         }
     }
+
+
 
     fun getRAMInfo()
     {

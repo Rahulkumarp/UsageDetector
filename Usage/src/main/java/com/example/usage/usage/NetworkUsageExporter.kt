@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.TrafficStats
 import android.util.Log
 import com.example.usage.`interface`.AppMetric
+import com.example.usage.utils.Utils
 import java.io.File
 import java.io.FileOutputStream
 import java.io.PrintWriter
@@ -11,7 +12,7 @@ import java.lang.RuntimeException
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
 
-class NetworkUsageExporter(context : Context) : AppMetric {
+class NetworkUsageExporter(var context : Context) : AppMetric {
 
 
     private companion object{
@@ -50,6 +51,11 @@ class NetworkUsageExporter(context : Context) : AppMetric {
 
     override fun close() {
        networkPw.close()
+    }
+
+    override fun setPath() {
+      //  Utils.setDataInContentProvider(context, NETWORK_USAGE_FILENAME,"txt")
+
     }
 
 

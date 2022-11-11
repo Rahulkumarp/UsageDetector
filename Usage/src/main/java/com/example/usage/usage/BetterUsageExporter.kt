@@ -6,6 +6,7 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.util.Log
 import com.example.usage.`interface`.AppMetric
+import com.example.usage.utils.Utils
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -40,5 +41,9 @@ class BetterUsageExporter(private val context: Context) : AppMetric {
 
     override fun close() {
        batteryPw.close()
+    }
+
+    override fun setPath() {
+        //Utils.setDataInContentProvider(context, BATTERY_USAGE_FILENAME,"txt")
     }
 }

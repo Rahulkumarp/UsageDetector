@@ -1,10 +1,16 @@
 package com.example.usage.usage
 
+import android.content.ContentValues
 import android.content.Context
+import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import com.example.usage.`interface`.AppMetric
+import com.example.usage.utils.Utils
 import java.io.File
 import java.io.FileOutputStream
+import java.io.OutputStream
 import java.io.PrintWriter
 import kotlin.jvm.Throws
 
@@ -15,11 +21,23 @@ class CPUUsageExporter(var context: Context) : AppMetric {
         const val PACKAGE_NAME = "com.example.usagedetector"
     }
 
-    private val cpuPw = PrintWriter(
-        FileOutputStream(
-            File(context.filesDir, CPU_USAGE_FILENAME), true
-        ), true
-    )
+    var outputStream  : OutputStream? = null
+
+    val baseDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+    val pathDir = "$baseDir"
+    val fileName = CPU_USAGE_FILENAME
+    val mydir = File(pathDir,fileName)
+
+
+    // val cpuPw = PrintWriter(FileOutputStream(mydir, true), true)
+    private var cpuPw :PrintWriter? = null
+
+
+//    private val cpuPw = PrintWriter(
+//        FileOutputStream(
+//            File(context.filesDir, CPU_USAGE_FILENAME), true
+//        ), true
+//    )
 
 
 
@@ -34,7 +52,12 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
     override fun close() {
 
-        cpuPw.close()
+        cpuPw?.close()
+    }
+
+    override fun setPath() {
+       outputStream =  Utils.setDataInContentProvider(context, CPU_USAGE_FILENAME,"txt")
+        cpuPw = PrintWriter(outputStream, true)
     }
 
 
@@ -65,11 +88,13 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 //                "Not Found process state of $PACKAGE_NAME"
 //            }
 
-        cpuPw.println("Screen Name $screenName \n" +
-                " Button Clicked $buttonName")
+        cpuPw?.println("Screen Name $screenName \n" +
+                " Button Clicked $buttonName ${Utils.getDate()}")
 
         for(element in processLine) {
-            cpuPw.println(element)
+            if(element != processLine[0]) {
+                cpuPw?.println(element)
+            }
         }
 
          Log.d("CPU", processLine[0].toString())
@@ -94,4 +119,5 @@ class CPUUsageExporter(var context: Context) : AppMetric {
         return Runtime.getRuntime()
             .exec(pSystemFile).inputStream.bufferedReader().useLines { it.toList() }
     }
+
 }
