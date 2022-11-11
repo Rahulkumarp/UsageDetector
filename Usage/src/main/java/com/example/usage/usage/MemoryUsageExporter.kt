@@ -23,7 +23,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
       private val absolutePath = context.filesDir.absolutePath
 
 
-    lateinit var outputStrem : OutputStream
+    var outputStrem : OutputStream? = null
   //  private val memPw = PrintWriter(FileOutputStream(mydir, true), true)
   //  private val memPw = PrintWriter(FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true), true)
   lateinit var memPw : PrintWriter
@@ -67,8 +67,10 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
 
     override fun setPath() {
         outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"txt")
-        if(outputStrem!=null)
-        memPw = PrintWriter(outputStrem, true)
+          if(outputStrem!=null) {
+              memPw = PrintWriter(outputStrem, true)
+          }
+
 
     }
 

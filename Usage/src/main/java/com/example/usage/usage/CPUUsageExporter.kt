@@ -56,8 +56,13 @@ class CPUUsageExporter(var context: Context) : AppMetric {
     }
 
     override fun setPath() {
-       outputStream =  Utils.setDataInContentProvider(context, CPU_USAGE_FILENAME,"txt")
-        cpuPw = PrintWriter(outputStream, true)
+        outputStream = Utils.setDataInContentProvider(context,
+            CPU_USAGE_FILENAME,"txt")
+        if(outputStream!=null) {
+            cpuPw = PrintWriter(outputStream, true)
+        }
+
+
     }
 
 

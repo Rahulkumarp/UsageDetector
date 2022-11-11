@@ -19,10 +19,9 @@ object Utils {
         return formattedDate
     }
 
-     fun setDataInContentProvider(context: Context,fileName: String, mime_type: String) : OutputStream {
+     fun setDataInContentProvider(context: Context,fileName: String, mime_type: String) : OutputStream? {
          var imageOutStream: OutputStream? = null
-         if (!File(
-                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+         if (!File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/memusage") ,
                  fileName
              ).exists()
          ) {
@@ -31,7 +30,7 @@ object Utils {
              val values = ContentValues().apply {
                  put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
                  put(MediaStore.Images.Media.MIME_TYPE, mime_type)
-                 put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS)
+                 put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS+"/memusage")
              }
 
 
@@ -45,14 +44,8 @@ object Utils {
 
              return imageOutStream!!
          }else {
-             var oFile = FileOutputStream(
-                 File(
-                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-                     fileName
-                 ), false
-             )
 
-             return oFile
+             return null
          }
          }
 
