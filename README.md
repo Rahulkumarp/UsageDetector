@@ -25,6 +25,6 @@ allprojects {
   > In your Activity / Fragment / On Clicks
   
   ```
-    AppMetricExporter(this).startCollect()
+    AppMetricExporter(this).startCollect("YOUR_FOLDER_NAME_IN_DOCUMENT")
     
     ```
