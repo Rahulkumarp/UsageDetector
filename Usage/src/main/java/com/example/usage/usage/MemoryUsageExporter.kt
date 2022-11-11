@@ -65,8 +65,8 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
         memPw.close()
     }
 
-    override fun setPath() {
-        outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"txt")
+    override fun setPath(folder : String) {
+        outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"txt",folder)
           if(outputStrem!=null) {
               memPw = PrintWriter(outputStrem, true)
           }

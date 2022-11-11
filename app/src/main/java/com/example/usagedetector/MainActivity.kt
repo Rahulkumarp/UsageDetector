@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener{
 
-            AppMetricExporter(this,"MainActivity screen","hello button").startCollect()
+            AppMetricExporter(this,"MainActivity screen","hello button").startCollect("usage2")
             getRAMInfo()
 
             getMemoryInfo()

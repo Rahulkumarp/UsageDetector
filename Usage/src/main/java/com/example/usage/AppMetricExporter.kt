@@ -24,8 +24,8 @@ open class AppMetricExporter(context: Context, var screenName : String, var butt
 
     private var disposable: Disposable? = null
 
-    fun startCollect() {
-        createPathForFile()
+    fun startCollect(folder : String) {
+        createPathForFile(folder)
         disposable = Observable.interval(INITIAL_DELAY, INTERVAL_TIME_IN_SEC, TimeUnit.SECONDS)
             .subscribe({ exporters.forEach{ it.export(screenName,buttonName)}},{th ->
                 Timber.e(th)})
@@ -37,9 +37,9 @@ open class AppMetricExporter(context: Context, var screenName : String, var butt
         disposable = null
     }
 
-    fun createPathForFile()
+    fun createPathForFile(folder: String)
     {
-        exporters.forEach { it.setPath() }
+        exporters.forEach { it.setPath(folder) }
     }
 
 

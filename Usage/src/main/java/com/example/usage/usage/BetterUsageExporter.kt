@@ -43,7 +43,7 @@ class BetterUsageExporter(private val context: Context) : AppMetric {
        batteryPw.close()
     }
 
-    override fun setPath() {
+    override fun setPath(folder : String) {
         //Utils.setDataInContentProvider(context, BATTERY_USAGE_FILENAME,"txt")
     }
 }

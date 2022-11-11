@@ -53,7 +53,7 @@ class NetworkUsageExporter(var context : Context) : AppMetric {
        networkPw.close()
     }
 
-    override fun setPath() {
+    override fun setPath(folder : String) {
       //  Utils.setDataInContentProvider(context, NETWORK_USAGE_FILENAME,"txt")
 
     }
