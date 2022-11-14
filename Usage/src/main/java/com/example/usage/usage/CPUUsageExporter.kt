@@ -17,7 +17,7 @@ import kotlin.jvm.Throws
 class CPUUsageExporter(var context: Context) : AppMetric {
 
     private companion object {
-        const val CPU_USAGE_FILENAME = "cpu_usage.txt"
+        const val CPU_USAGE_FILENAME = "cpu_usage.csv"
         const val PACKAGE_NAME = "com.example.usagedetector"
     }
 

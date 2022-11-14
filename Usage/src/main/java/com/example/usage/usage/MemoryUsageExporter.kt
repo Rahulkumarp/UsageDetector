@@ -15,7 +15,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
 
     private companion object{
 
-        const val MEM_USAGE_FILENAME = "mem_usage.txt"
+        const val MEM_USAGE_FILENAME = "mem_usage.csv"
 
         const val CRITICAL_MEMORY_LOADING = 0.9
     }
@@ -48,8 +48,14 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
             }
         }
 
-        val str = "Screen Name $screenName \n Button Clicked $buttonName ${Utils.getDate()} \n Used Heap size - $usedHeapSizeInMB Avail Heap size - $availHeapSizeInMB Max Heap Size - $maxHeapSizeInMB " +
-                "Used Native Memory -  $usedNativeMemoryInMB Avail Native Memory  Free - $availNativeMemoryFreeSize Total Native Memory - $totalNativeMemorySize "
+        val str = "Screen Name $screenName \n Button Clicked $buttonName ${Utils.getDate()} \n " +
+                "Used Heap size,Avail Heap size,Max Heap Size,Used Native Memory,Avail Native Memory  Free,Total Native Memory \n" +
+                "Used Heap size - $usedHeapSizeInMB, " +
+                "Avail Heap size - $availHeapSizeInMB," +
+                " Max Heap Size - $maxHeapSizeInMB, " +
+                "Used Native Memory -  $usedNativeMemoryInMB," +
+                " Avail Native Memory  Free - $availNativeMemoryFreeSize," +
+                " Total Native Memory - $totalNativeMemorySize "
 
         memPw.println(str)
         Log.d("Memory -maxMemory ",convertINMBWithString(runtime.maxMemory())!!)
@@ -66,7 +72,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
     }
 
     override fun setPath(folder : String) {
-        outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"txt",folder)
+        outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"csv",folder)
           if(outputStrem!=null) {
               memPw = PrintWriter(outputStrem, true)
           }

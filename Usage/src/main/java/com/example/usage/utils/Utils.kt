@@ -29,7 +29,7 @@ object Utils {
 
              val values = ContentValues().apply {
                  put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
-                 put(MediaStore.Images.Media.MIME_TYPE, mime_type)
+                 put(MediaStore.Images.Media.MIME_TYPE, "csv")
                  put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS+"/$folder")
              }
 
