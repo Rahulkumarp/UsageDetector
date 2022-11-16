@@ -18,9 +18,10 @@ open class AppMetricExporter(context: Context, var screenName : String, var butt
     }
 
     private val exporters = listOf(
-        MemoryUsageExporter(context), CPUUsageExporter(context),
-        NetworkUsageExporter(context), BetterUsageExporter(context)
+        MemoryUsageExporter(context), CPUUsageExporter(context)
     )
+
+  //  NetworkUsageExporter(context), BetterUsageExporter(context)
 
     private var disposable: Disposable? = null
 
