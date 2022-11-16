@@ -20,7 +20,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
         const val CRITICAL_MEMORY_LOADING = 0.9
     }
 
-      private val absolutePath = context.filesDir.absolutePath
+     // private val absolutePath = context.filesDir.absolutePath
 
 
     var outputStrem : OutputStream? = null
@@ -43,7 +43,8 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
             if (maxHeapSizeInMB != null) {
                 if(usedHeapSizeInMB > (maxHeapSizeInMB * CRITICAL_MEMORY_LOADING)) {
 
-                    Debug.dumpHprofData("$absolutePath/dump_heap_memory_${System.currentTimeMillis()}.hprof")
+                    Log.d("Dump heap memory","dump heap memory")
+                    //   Debug.dumpHprofData("$absolutePath/dump_heap_memory_${System.currentTimeMillis()}.hprof")
                 }
             }
         }
