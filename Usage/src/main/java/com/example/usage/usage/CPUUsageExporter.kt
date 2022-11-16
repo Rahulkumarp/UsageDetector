@@ -23,12 +23,6 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
     var outputStream  : OutputStream? = null
 
-    val baseDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-    val pathDir = "$baseDir"
-    val fileName = CPU_USAGE_FILENAME
-    val mydir = File(pathDir,fileName)
-
-
     // val cpuPw = PrintWriter(FileOutputStream(mydir, true), true)
     private var cpuPw :PrintWriter? = null
 
