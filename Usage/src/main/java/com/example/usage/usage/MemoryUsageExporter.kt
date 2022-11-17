@@ -29,7 +29,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
   lateinit var memPw : PrintWriter
   ///    FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true), true)
 
-    override fun export(screenName: String, buttonName: String) {
+    override fun export(screenName: String?, buttonName: String?) {
        val runtime = Runtime.getRuntime()
         val maxHeapSizeInMB = convertInMBOnlyNumber(runtime.maxMemory())
         val availHeapSizeInMB = convertInMBOnlyNumber(runtime.freeMemory())
@@ -49,17 +49,10 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
             }
         }
 
-        val str = "Screen Name $screenName \n Button Clicked $buttonName ${Utils.getDate()} \n " +
-                "Used Heap size,Avail Heap size,Max Heap Size,Used Native Memory,Avail Native Memory  Free,Total Native Memory \n" +
-                "Used Heap size - $usedHeapSizeInMB, " +
-                "Avail Heap size - $availHeapSizeInMB," +
-                " Max Heap Size - $maxHeapSizeInMB, " +
-                "Used Native Memory -  $usedNativeMemoryInMB," +
-                " Avail Native Memory  Free - $availNativeMemoryFreeSize," +
-                " Total Native Memory - $totalNativeMemorySize "
-
+        var str = "${Utils.getDate()},$screenName,Idle ,$buttonName,$usedHeapSizeInMB,$availHeapSizeInMB,$maxHeapSizeInMB,$usedNativeMemoryInMB,$availNativeMemoryFreeSize,$totalNativeMemorySize"
         memPw.println(str)
-        Log.d("Memory -maxMemory ",convertINMBWithString(runtime.maxMemory())!!)
+
+
         Log.d("Memory -freeMemory ",convertINMBWithString(runtime.freeMemory())!!)
         Log.d("Memory -UsedMemory",convertINMBWithString(runtime.totalMemory()- runtime.freeMemory())!!)
         Log.d("Memory -NativeHeapSize ",convertINMBWithString(Debug.getNativeHeapSize())!!)
@@ -76,6 +69,8 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
         outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"csv",folder)
           if(outputStrem!=null) {
               memPw = PrintWriter(outputStrem, true)
+              var header = "Time, Screen Name, Idle, Action Performed, Used Heap Size,Avail Heap Size, Max heap size, Used Native Memory, Avail Native MemoryFree,Total Native Memory"
+              memPw.println(header)
           }
 
 

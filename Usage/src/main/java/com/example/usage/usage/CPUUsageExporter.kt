@@ -26,7 +26,6 @@ class CPUUsageExporter(var context: Context) : AppMetric {
     // val cpuPw = PrintWriter(FileOutputStream(mydir, true), true)
     private var cpuPw :PrintWriter? = null
 
-
 //    private val cpuPw = PrintWriter(
 //        FileOutputStream(
 //            File(context.filesDir, CPU_USAGE_FILENAME), true
@@ -35,7 +34,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
 
 
-    override fun export(screenName: String, buttonName: String) {
+    override fun export(screenName: String?, buttonName: String?) {
 
         try {
             recordCpu(screenName,buttonName)
@@ -54,13 +53,15 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             CPU_USAGE_FILENAME,"txt",folder)
         if(outputStream!=null) {
             cpuPw = PrintWriter(outputStream, true)
+            cpuPw?.println("Time, Screen Name, Idle, Action Performed,PID,USER,PR,NI,VIRT,RES,SHR,S[%CPU],%MEM,TIME+,ARGS")
+
         }
 
 
     }
 
 
-    fun recordCpu(screenName: String, buttonName: String) {
+    fun recordCpu(screenName: String?, buttonName: String?) {
 //        val processLine = readSystemFile("top","-n","1")
 //            .flatMap { it.split(" ") }
 //            .map ( String::trim )
@@ -87,14 +88,37 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 //                "Not Found process state of $PACKAGE_NAME"
 //            }
 
-        cpuPw?.println("Screen Name $screenName \n" +
-                " Button Clicked $buttonName ${Utils.getDate()}")
-
         for(element in processLine) {
             if(element != processLine[0]) {
-                cpuPw?.println(element)
+                var string  = element
+               /* string = string.replace("   ",",")
+                string = string.replace("  ",",")
+                string = string.replace(" ",",")
+          //    */
+                //cpuPw?.println(string)
             }
         }
+
+
+//        var processLine4 =   processLine[4].replace("      ",",")
+//            .replace("    ",",").
+//            replace("   ",",").replace("  ",",")
+//            .replace(" ",",").replace(",,",",")
+//       var data =" ${Utils.getDate()},$screenName, Idle,$buttonName +$processLine4"
+//        cpuPw?.println(data)
+      var processLine5 =   processLine[5].replace("      ",",")
+            .replace("    ",",").
+            replace("   ",",").replace("  ",",")
+            .replace(" ",",").replace(",,",",")
+        var data5 =" ${Utils.getDate()},$screenName, Idle,$buttonName +$processLine5"
+        cpuPw?.println(data5)
+        var processLine7 =   processLine[7].replace("      ",",")
+            .replace("    ",",").
+            replace("   ",",").replace("  ",",")
+            .replace(" ",",").replace(",,",",")
+
+        var data7 =" ${Utils.getDate()},$screenName, Idle,$buttonName +$processLine7"
+        cpuPw?.println(data7)
 
          Log.d("CPU", processLine[0].toString())
          Log.d("CPU", processLine[1].toString())

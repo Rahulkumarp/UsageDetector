@@ -22,11 +22,13 @@ import java.text.StringCharacterIterator
 class MainActivity : AppCompatActivity() {
 
     private lateinit var button : Button
+    private lateinit var button2 : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         button = findViewById<Button>(R.id.hello_world)
+        button2 = findViewById<Button>(R.id.hello_world2)
 
         Log.d("CPU", getCPUDetails().toString())
         getRAMInfo()
@@ -47,14 +49,29 @@ class MainActivity : AppCompatActivity() {
             // continue with your code
         }
 
+        var appMetricExporter = AppMetricExporter(this)
+        appMetricExporter.createPathForFile("usage6")
+
+
         button.setOnClickListener{
 
-            AppMetricExporter(this,"MainActivity screen","hello button").startCollect("usage2")
-            getRAMInfo()
+         appMetricExporter.startCollect("MAINACTIVITY", "check")
+//            getRAMInfo()
+//
+//            getMemoryInfo()
+//
+//            getApkSize(this)
+        }
 
-            getMemoryInfo()
 
-            getApkSize(this)
+        button2.setOnClickListener{
+
+            appMetricExporter.startCollect("MAINACTIVITY", "EXIST")
+//            getRAMInfo()
+//
+//            getMemoryInfo()
+//
+//            getApkSize(this)
         }
     }
 

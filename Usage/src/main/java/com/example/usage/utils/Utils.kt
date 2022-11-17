@@ -1,7 +1,10 @@
 package com.example.usage.utils
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
+import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
@@ -10,6 +13,7 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 object Utils {
 
@@ -22,9 +26,7 @@ object Utils {
 
     fun setDataInContentProvider(context: Context,fileName: String, mime_type: String, folder : String) : OutputStream? {
         var imageOutStream: OutputStream? = null
-        if (!File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/$folder") ,
-                fileName
-            ).exists()
+        if (!File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/$folder") , fileName).exists()
         ) {
 
             if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q){
@@ -58,10 +60,11 @@ object Utils {
             }
 
         }else {
-
-            return null
+            imageOutStream = FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).absolutePath +"/$folder"+"/$fileName")
+            return imageOutStream
         }
     }
+
 
 
 }
