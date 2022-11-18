@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Debug
 import android.util.Log
 import com.example.usage.`interface`.AppMetric
+import com.example.usage.utils.Constants
 import com.example.usage.utils.Utils
 import java.io.OutputStream
 import java.io.PrintWriter
@@ -30,7 +31,10 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
   ///    FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true), true)
 
     override fun export(screenName: String?, buttonName: String?) {
-       val runtime = Runtime.getRuntime()
+
+        var isIdle = Constants.idleMemoryUsage
+
+        val runtime = Runtime.getRuntime()
         val maxHeapSizeInMB = convertInMBOnlyNumber(runtime.maxMemory())
         val availHeapSizeInMB = convertInMBOnlyNumber(runtime.freeMemory())
         val usedHeapSizeInMB = convertInMBOnlyNumber(runtime.totalMemory() - runtime.freeMemory())
@@ -49,7 +53,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
             }
         }
 
-        var str = "${Utils.getDate()},$screenName,Idle ,$buttonName,$usedHeapSizeInMB,$availHeapSizeInMB,$maxHeapSizeInMB,$usedNativeMemoryInMB,$availNativeMemoryFreeSize,$totalNativeMemorySize"
+        var str = "${Utils.getDate()},$screenName,$isIdle ,$buttonName,$usedHeapSizeInMB,$availHeapSizeInMB,$maxHeapSizeInMB,$usedNativeMemoryInMB,$availNativeMemoryFreeSize,$totalNativeMemorySize"
         memPw.println(str)
 
 
@@ -59,6 +63,8 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
         Log.d("Mem-NativeHeapFreeSize ",convertINMBWithString(Debug.getNativeHeapFreeSize())!!)
         Log.d("Mem-NativeHeapUsedSize ",convertINMBWithString(Debug.getNativeHeapSize() - Debug.getNativeHeapFreeSize() )!!)
 
+
+        Constants.idleMemoryUsage = true
     }
 
     override fun close() {

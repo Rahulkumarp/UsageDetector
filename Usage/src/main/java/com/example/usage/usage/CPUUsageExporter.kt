@@ -7,6 +7,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import com.example.usage.`interface`.AppMetric
+import com.example.usage.utils.Constants
 import com.example.usage.utils.Utils
 import java.io.File
 import java.io.FileOutputStream
@@ -53,7 +54,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             CPU_USAGE_FILENAME,"txt",folder)
         if(outputStream!=null) {
             cpuPw = PrintWriter(outputStream, true)
-            cpuPw?.println("Time, Screen Name, Idle, Action Performed,PID,USER,PR,NI,VIRT,RES,SHR,S[%CPU],%MEM,TIME+,ARGS")
+            cpuPw?.println("Time, Screen Name, Idle, Action Performed,PID,USER,PR,NI,VIRT,RES,SHR,S[%CPU],,%MEM,TIME+,ARGS")
 
         }
 
@@ -62,6 +63,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
 
     fun recordCpu(screenName: String?, buttonName: String?) {
+        var isIdle = Constants.idleCPUUsage
 //        val processLine = readSystemFile("top","-n","1")
 //            .flatMap { it.split(" ") }
 //            .map ( String::trim )
@@ -110,15 +112,26 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             .replace("    ",",").
             replace("   ",",").replace("  ",",")
             .replace(" ",",").replace(",,",",")
-        var data5 =" ${Utils.getDate()},$screenName, Idle,$buttonName +$processLine5"
+        var data5 =" ${Utils.getDate()},$screenName, $isIdle,$buttonName +$processLine5"
         cpuPw?.println(data5)
+
+        if(processLine[5].contains("top")){
         var processLine7 =   processLine[7].replace("      ",",")
             .replace("    ",",").
             replace("   ",",").replace("  ",",")
             .replace(" ",",").replace(",,",",")
 
-        var data7 =" ${Utils.getDate()},$screenName, Idle,$buttonName +$processLine7"
+        var data7 =" ${Utils.getDate()},$screenName, $isIdle,$buttonName +$processLine7"
         cpuPw?.println(data7)
+        }else{
+            var processLine6 =   processLine[6].replace("      ",",")
+                .replace("    ",",").
+                replace("   ",",").replace("  ",",")
+                .replace(" ",",").replace(",,",",")
+
+            var data6 =" ${Utils.getDate()},$screenName, $isIdle,$buttonName +$processLine6"
+            cpuPw?.println(data6)
+        }
 
          Log.d("CPU", processLine[0].toString())
          Log.d("CPU", processLine[1].toString())
@@ -130,6 +143,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
          Log.d("CPU", processLine[7].toString())
 
 
+        Constants.idleCPUUsage = true
         val file = File(context.filesDir, CPU_USAGE_FILENAME)
         if(file.exists()) {
             Log.d("CPU", "YES")

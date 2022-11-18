@@ -22,9 +22,33 @@ allprojects {
 	}
   ```
   
-  > In your Activity / Fragment / On Clicks
+  > In your Activity / Fragment Step 1
   
   ```
-    AppMetricExporter(this,"SCREEN_NAME","BUTTON TASK").startCollect("YOUR_FOLDER_NAME_IN_DOCUMENT")
-    
-    ```
+      lateinit var appMetricExporter :  AppMetricExporter
+   ```  
+
+> In your Activity  onCreate() Step 2
+
+  ```
+      appMetricExporter = AppMetricExporter(this)
+        appMetricExporter.createPathForFile("TYPE your Folder NAME")
+   ```  
+
+
+> In your Activity To check Usage on click Step 3
+
+  ```
+     appMetricExporter.startCollect("MAINACTIVITY", "check")
+   ```   
+
+> In your Activity To finish Usage Detection on click Step 4
+
+  ```
+     override fun onDestroy() {
+        super.onDestroy()
+        appMetricExporter.stopCollect()
+
+    }
+   ```   
+

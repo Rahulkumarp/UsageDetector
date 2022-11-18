@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var button : Button
     private lateinit var button2 : Button
+    lateinit var appMetricExporter :  AppMetricExporter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             // continue with your code
         }
 
-        var appMetricExporter = AppMetricExporter(this)
+        appMetricExporter = AppMetricExporter(this)
         appMetricExporter.createPathForFile("usage6")
 
 
@@ -163,5 +164,11 @@ class MainActivity : AppCompatActivity() {
         val file = File(applicationInfo.publicSourceDir)
         val size = file.length()
         Log.d("size_of_apk", humanReadableByteCountSI(size).toString())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        appMetricExporter.stopCollect()
+
     }
 }
