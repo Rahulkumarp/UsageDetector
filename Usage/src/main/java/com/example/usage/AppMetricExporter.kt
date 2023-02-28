@@ -27,7 +27,7 @@ open class AppMetricExporter(context: Context) {
 
     private var disposable: Disposable? = null
 
-    fun startCollect(screenName : String?, buttonName : String?) {
+    fun startCollect(screenName : String?, actionPerformed : String?) {
         var thread = Thread.currentThread()
         var fileName = thread.stackTrace[3].fileName
         var lineNumber = thread.stackTrace[3].lineNumber
@@ -36,7 +36,7 @@ open class AppMetricExporter(context: Context) {
         Constants.idleCPUUsage = false
         disposable = Observable.interval(INITIAL_DELAY, INTERVAL_TIME_IN_SEC, TimeUnit.SECONDS)
             .subscribe({ exporters.forEach{
-                it.export(screenName,buttonName,fileName, lineNumber.toString(), methodName)}},{th ->
+                it.export(screenName,actionPerformed,fileName, lineNumber.toString(), methodName)}},{th ->
                 Timber.e(th)})
     }
 
