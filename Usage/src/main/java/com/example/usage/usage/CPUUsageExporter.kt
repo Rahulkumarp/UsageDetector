@@ -71,7 +71,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             CPU_USAGE_FILENAME,"txt",folder)
         if(outputStream!=null) {
             cpuPw = PrintWriter(outputStream, true)
-            cpuPw?.println("Time, Screen Name, Idle, Action Performed, File Name, Line Number, Method Name,PID,USER,PR,NI,VIRT,RES,SHR,Status(S/R),[%CPU],,%MEM,TIME+,ARGS")
+            cpuPw?.println("Time, Screen Name, Idle, Action Performed, File Name, Line No., Method,PID,USER,PR,NI,VIRT,RES,SHR,Status(S/R),[%CPU],%MEM,TIME+,ARGS")
 
         }
 
@@ -85,44 +85,48 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
         val processLine = readSystemFile("top", "-n", "1")
 
-      var processLine5 =   processLine[5].replace("      ",",")
-            .replace("    ",",").
-            replace("   ",",").replace("  ",",")
-            .replace(" ",",").replace(",,",",")
-        if(!processLine5.contains("top")) {
-            var data5 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName+$processLine5"
-            cpuPw?.println(data5)
+
+
+        if(!processLine[5].contains("top") && processLine[5].length > 10 ) {
+            var processLine5 = processLine[5].replace("      ", ",")
+                .replace("    ", ",").replace("   ", ",").replace("  ", ",")
+                .replace(" ", ",").replace(",,", ",")
+                var data5 =
+                    " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine5"
+                cpuPw?.println(data5)
+
         }
 
-        if(processLine[5].contains("top")){
-        var processLine7 =   processLine[7].replace("      ",",")
-            .replace("    ",",").
-            replace("   ",",").replace("  ",",")
-            .replace(" ",",").replace(",,",",")
-            if(!processLine7.contains("top")) {
-                var data7 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName+$processLine7"
-                cpuPw?.println(data7)
-            }
-        }else{
+        if(!processLine[6].contains("top") && processLine[6].length > 10 ) {
+            Log.d("CPUL", processLine[6].length.toString())
             var processLine6 =   processLine[6].replace("      ",",")
                 .replace("    ",",").
                 replace("   ",",").replace("  ",",")
                 .replace(" ",",").replace(",,",",")
 
-            if(!processLine6.contains("top")) {
-                var data6 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,+$processLine6"
+
+                var data6 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine6"
                 cpuPw?.println(data6)
             }
+
+        if(!processLine[7].contains("top") && processLine[7].length > 10 ) {
+        var processLine7 =   processLine[7].replace("      ",",")
+            .replace("    ",",").
+            replace("   ",",").replace("  ",",")
+            .replace(" ",",").replace(",,",",")
+
+            var data7 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine7"
+            cpuPw?.println(data7)
         }
 
-         Log.d("CPU", processLine[0].toString())
-         Log.d("CPU", processLine[1].toString())
-         Log.d("CPU", processLine[2].toString())
-         Log.d("CPU", processLine[3].toString())
-         Log.d("CPU", processLine[4].toString())
-         Log.d("CPU", processLine[5].toString())
-         Log.d("CPU", processLine[6].toString())
-         Log.d("CPU", processLine[7].toString())
+         Log.d("CPU0", processLine[0].toString())
+         Log.d("CPU1", processLine[1].toString())
+         Log.d("CPU2", processLine[2].toString())
+         Log.d("CPU3", processLine[3].toString())
+         Log.d("CPU4", processLine[4].toString())
+         Log.d("CPU5", processLine[5].toString())
+         Log.d("CPU6", processLine[6].toString())
+         Log.d("CPU7", processLine[7].toString())
 
 
         Constants.idleCPUUsage = true

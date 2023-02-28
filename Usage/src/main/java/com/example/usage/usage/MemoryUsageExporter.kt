@@ -1,5 +1,6 @@
 package com.example.usage.usage
 
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.ActivityManager.MemoryInfo
 import android.content.Context
@@ -90,11 +91,12 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
         memPw.close()
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun setPath(folder : String) {
         outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"csv",folder)
           if(outputStrem!=null) {
               memPw = PrintWriter(outputStrem, true)
-              var header = "Time, Screen Name, Idle, Action Performed, Used Heap Size,Avail Heap Size, Max heap size, Used Native Memory, Avail Native MemoryFree,Total Native Memory"
+              var header = "Time, Screen Name, Idle, Action Performed, File Name, Line No., Method, Used Heap Size,Avail Heap Size, Max heap size, Used Native Memory, Avail Native MemoryFree,Total Native Memory"
               memPw.println(header)
           }
 

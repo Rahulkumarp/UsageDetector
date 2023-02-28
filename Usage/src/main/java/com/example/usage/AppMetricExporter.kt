@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 open class AppMetricExporter(context: Context) {
 
     private companion object {
-        const val INTERVAL_TIME_IN_SEC = 1L
+        const val INTERVAL_TIME_IN_SEC = 4L
         const val INITIAL_DELAY = 0L
     }
 
