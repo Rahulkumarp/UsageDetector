@@ -1,5 +1,6 @@
 package com.example.usage.usage
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
@@ -78,6 +79,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     fun recordCpu(screenName: String?, buttonName: String?, fileName : String, lineName : String, methodName: String,) {
         var isIdle = Constants.idleCPUUsage
 
@@ -88,7 +90,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             replace("   ",",").replace("  ",",")
             .replace(" ",",").replace(",,",",")
         if(!processLine5.contains("top")) {
-            var data5 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,$processLine5"
+            var data5 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName+$processLine5"
             cpuPw?.println(data5)
         }
 
@@ -98,7 +100,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             replace("   ",",").replace("  ",",")
             .replace(" ",",").replace(",,",",")
             if(!processLine7.contains("top")) {
-                var data7 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,$processLine7"
+                var data7 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName+$processLine7"
                 cpuPw?.println(data7)
             }
         }else{
@@ -108,7 +110,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
                 .replace(" ",",").replace(",,",",")
 
             if(!processLine6.contains("top")) {
-                var data6 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,$processLine6"
+                var data6 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,+$processLine6"
                 cpuPw?.println(data6)
             }
         }
