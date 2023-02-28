@@ -30,7 +30,13 @@ class NetworkUsageExporter(var context : Context) : AppMetric {
 
 
 
-    override fun export(screenName: String?, buttonName: String?) {
+    override fun export(
+        screenName: String?,
+        buttonName: String?,
+        fileName: String,
+        lineName: String,
+        methodName: String
+    ) {
        val tBytes = TrafficStats.getTotalTxBytes()
        val rBytes = TrafficStats.getTotalRxBytes()
 

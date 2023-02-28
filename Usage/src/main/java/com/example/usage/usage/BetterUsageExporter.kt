@@ -25,7 +25,13 @@ class BetterUsageExporter(private val context: Context) : AppMetric {
     private val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
 
 
-    override fun export(screenName: String?, buttonName: String?) {
+    override fun export(
+        screenName: String?,
+        buttonName: String?,
+        fileName: String,
+        lineName: String,
+        methodName: String
+    ) {
         val batteryStatus : Intent = intentFilter.let {
                 ifilter -> context.registerReceiver(null, ifilter)!!
         }

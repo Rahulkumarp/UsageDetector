@@ -17,6 +17,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
+import java.util.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +58,12 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener{
 
          appMetricExporter.startCollect("MAINACTIVITY", "check")
-//            getRAMInfo()
+            for(i in 0 until 10000000) {
+              //  Log.d("checkaa", i.toString())
+            }
+
+//
+        //            getRAMInfo()
 //
 //            getMemoryInfo()
 //
@@ -67,8 +73,7 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener{
 
-            appMetricExporter.startCollect("MAINACTIVITY", "EXIST")
-//            getRAMInfo()
+            checkFunTest()
 //
 //            getMemoryInfo()
 //
@@ -76,6 +81,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    fun checkFunTest() {
+        appMetricExporter.startCollect("MAINACTIVITY", "EXIST")
+
+    }
 
 
     fun getRAMInfo()

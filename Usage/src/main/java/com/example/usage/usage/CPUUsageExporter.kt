@@ -17,6 +17,7 @@ import kotlin.jvm.Throws
 
 class CPUUsageExporter(var context: Context) : AppMetric {
 
+    var buttonName = ""
     private companion object {
         const val CPU_USAGE_FILENAME = "cpu_usage.csv"
         const val PACKAGE_NAME = "com.example.usagedetector"
@@ -35,14 +36,29 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
 
 
-    override fun export(screenName: String?, buttonName: String?) {
+    override fun export(
+        screenName: String?,
+        buttonName: String?,
+        fileName: String,
+        lineName: String,
+        methodName: String
+    ) {
+
+//        if(Constants.idleCPUUsage){
+//            this.buttonName = "NA"
+//        }else{
+//            if (buttonName != null) {
+//                this.buttonName = buttonName
+//            }
+//        }
 
         try {
-            recordCpu(screenName,buttonName)
+            recordCpu(screenName, buttonName, fileName, lineName, methodName)
         } catch (th: Throwable) {
 
         }
     }
+
 
     override fun close() {
 
@@ -54,7 +70,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             CPU_USAGE_FILENAME,"txt",folder)
         if(outputStream!=null) {
             cpuPw = PrintWriter(outputStream, true)
-            cpuPw?.println("Time, Screen Name, Idle, Action Performed,PID,USER,PR,NI,VIRT,RES,SHR,S[%CPU],,%MEM,TIME+,ARGS")
+            cpuPw?.println("Time, Screen Name, Idle, Action Performed, File Name, Line Number, Method Name,PID,USER,PR,NI,VIRT,RES,SHR,Status(S/R),[%CPU],,%MEM,TIME+,ARGS")
 
         }
 
@@ -62,75 +78,39 @@ class CPUUsageExporter(var context: Context) : AppMetric {
     }
 
 
-    fun recordCpu(screenName: String?, buttonName: String?) {
+    fun recordCpu(screenName: String?, buttonName: String?, fileName : String, lineName : String, methodName: String,) {
         var isIdle = Constants.idleCPUUsage
-//        val processLine = readSystemFile("top","-n","1")
-//            .flatMap { it.split(" ") }
-//            .map ( String::trim )
-//            .filter (String :: isNotEmpty)
-//
-//        if(processLine.isNotEmpty()){
-//            val index =  processLine.indexOfFirst { it == "S" || it == "R" || it == "D" }
-//            check(index > -1){
-//                "Not Found process state of $PACKAGE_NAME"
-//            }
-//
-//            cpuPw.println(processLine[index + 1].toFloat().toInt().toString())
-//        }
-
 
         val processLine = readSystemFile("top", "-n", "1")
-//            .flatMap { it.split(" ") }
-//            .map ( String::trim )
-//            .filter (String :: isNotEmpty)
-//
-//        if(processLine.isNotEmpty()){
-//            val index =  processLine.indexOfFirst { it == "S" || it == "R" || it == "D" }
-//            check(index > -1){
-//                "Not Found process state of $PACKAGE_NAME"
-//            }
 
-        for(element in processLine) {
-            if(element != processLine[0]) {
-                var string  = element
-               /* string = string.replace("   ",",")
-                string = string.replace("  ",",")
-                string = string.replace(" ",",")
-          //    */
-                //cpuPw?.println(string)
-            }
-        }
-
-
-//        var processLine4 =   processLine[4].replace("      ",",")
-//            .replace("    ",",").
-//            replace("   ",",").replace("  ",",")
-//            .replace(" ",",").replace(",,",",")
-//       var data =" ${Utils.getDate()},$screenName, Idle,$buttonName +$processLine4"
-//        cpuPw?.println(data)
       var processLine5 =   processLine[5].replace("      ",",")
             .replace("    ",",").
             replace("   ",",").replace("  ",",")
             .replace(" ",",").replace(",,",",")
-        var data5 =" ${Utils.getDate()},$screenName, $isIdle,$buttonName +$processLine5"
-        cpuPw?.println(data5)
+        if(!processLine5.contains("top")) {
+            var data5 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,$processLine5"
+            cpuPw?.println(data5)
+        }
 
         if(processLine[5].contains("top")){
         var processLine7 =   processLine[7].replace("      ",",")
             .replace("    ",",").
             replace("   ",",").replace("  ",",")
             .replace(" ",",").replace(",,",",")
-
-        var data7 =" ${Utils.getDate()},$screenName, $isIdle,$buttonName +$processLine7"
-        cpuPw?.println(data7)
+            if(!processLine7.contains("top")) {
+                var data7 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,$processLine7"
+                cpuPw?.println(data7)
+            }
         }else{
             var processLine6 =   processLine[6].replace("      ",",")
                 .replace("    ",",").
                 replace("   ",",").replace("  ",",")
                 .replace(" ",",").replace(",,",",")
 
-            var data6 =" ${Utils.getDate()},$screenName, $isIdle,$buttonName +$processLine6"
-            cpuPw?.println(data6)
+            if(!processLine6.contains("top")) {
+                var data6 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName,$processLine6"
+                cpuPw?.println(data6)
+            }
         }
 
          Log.d("CPU", processLine[0].toString())
@@ -144,10 +124,10 @@ class CPUUsageExporter(var context: Context) : AppMetric {
 
 
         Constants.idleCPUUsage = true
-        val file = File(context.filesDir, CPU_USAGE_FILENAME)
-        if(file.exists()) {
-            Log.d("CPU", "YES")
-        }
+//        val file = File(context.filesDir, CPU_USAGE_FILENAME)
+//        if(file.exists()) {
+//            Log.d("CPU", "YES")
+//        }
     }
 
 

@@ -1,8 +1,11 @@
 package com.example.usage.usage
 
+import android.app.ActivityManager
+import android.app.ActivityManager.MemoryInfo
 import android.content.Context
 import android.os.Debug
 import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
 import com.example.usage.`interface`.AppMetric
 import com.example.usage.utils.Constants
 import com.example.usage.utils.Utils
@@ -14,6 +17,7 @@ import java.text.StringCharacterIterator
 open class MemoryUsageExporter(var context: Context) : AppMetric {
 
 
+    var buttonName = ""
     private companion object{
 
         const val MEM_USAGE_FILENAME = "mem_usage.csv"
@@ -30,9 +34,24 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
   lateinit var memPw : PrintWriter
   ///    FileOutputStream(File(context.filesDir, MEM_USAGE_FILENAME), true), true)
 
-    override fun export(screenName: String?, buttonName: String?) {
+    override fun export(
+        screenName: String?,
+        buttonName: String?,
+        fileName: String,
+        lineName: String,
+        methodName: String
+    ) {
 
+        Log.d("xxc", Thread.currentThread().stackTrace[2].methodName)
         var isIdle = Constants.idleMemoryUsage
+
+//        if(Constants.idleMemoryUsage){
+//            this.buttonName = "NA"
+//        }else{
+//            if (buttonName != null) {
+//                this.buttonName = buttonName
+//            }
+//        }
 
         val runtime = Runtime.getRuntime()
         val maxHeapSizeInMB = convertInMBOnlyNumber(runtime.maxMemory())
@@ -53,7 +72,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
             }
         }
 
-        var str = "${Utils.getDate()},$screenName,$isIdle ,$buttonName,$usedHeapSizeInMB,$availHeapSizeInMB,$maxHeapSizeInMB,$usedNativeMemoryInMB,$availNativeMemoryFreeSize,$totalNativeMemorySize"
+        var str = "${Utils.getDate()},$screenName,$isIdle ,$buttonName,$fileName, $lineName, $methodName,$usedHeapSizeInMB,$availHeapSizeInMB,$maxHeapSizeInMB,$usedNativeMemoryInMB,$availNativeMemoryFreeSize,$totalNativeMemorySize"
         memPw.println(str)
 
 
