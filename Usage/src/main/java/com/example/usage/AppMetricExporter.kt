@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 open class AppMetricExporter(context: Context) {
 
     private companion object {
-        const val INTERVAL_TIME_IN_SEC = 4L
+        const val INTERVAL_TIME_IN_SEC = 1L
         const val INITIAL_DELAY = 0L
     }
 
@@ -46,8 +46,9 @@ open class AppMetricExporter(context: Context) {
         disposable = null
     }
 
-    fun createPathForFile(folder: String)
+    fun createPathForFile(folder: String, appName : String)
     {
+        Constants.appName = appName
         exporters.forEach { it.setPath(folder) }
     }
 

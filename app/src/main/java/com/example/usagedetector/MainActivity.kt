@@ -3,37 +3,46 @@ package com.example.usagedetector
 import android.Manifest
 import android.app.ActivityManager
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Debug
+import android.os.Environment
 import android.provider.Settings
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.usage.AppMetricExporter
+import com.example.usagedetector.model.CPUModel
 import java.io.File
+import java.io.FileReader
 import java.io.IOException
 import java.io.InputStream
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
-import java.util.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var button : Button
     private lateinit var button2 : Button
+    private lateinit var memoryData : Button
     lateinit var appMetricExporter :  AppMetricExporter
+    lateinit var  cpuList : ArrayList<CPUModel>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         button = findViewById<Button>(R.id.hello_world)
         button2 = findViewById<Button>(R.id.hello_world2)
-
+        memoryData = findViewById<Button>(R.id.memory_data)
+        cpuList = ArrayList<CPUModel>()
         Log.d("CPU", getCPUDetails().toString())
         getRAMInfo()
+
+
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -52,32 +61,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         appMetricExporter = AppMetricExporter(this)
-        appMetricExporter.createPathForFile("usage6")
+        appMetricExporter.createPathForFile("usage8","Usage Deectot")
 
 
         button.setOnClickListener{
 
          appMetricExporter.startCollect("MAINACTIVITY", "check")
-            for(i in 0 until 10000000) {
-              //  Log.d("checkaa", i.toString())
-            }
 
-//
-        //            getRAMInfo()
-//
-//            getMemoryInfo()
-//
-//            getApkSize(this)
         }
 
 
         button2.setOnClickListener{
+            getCSVData()
+        }
 
-            checkFunTest()
-//
-//            getMemoryInfo()
-//
-//            getApkSize(this)
+        memoryData.setOnClickListener {
+            getMemoryData()
         }
     }
 
@@ -174,6 +173,63 @@ class MainActivity : AppCompatActivity() {
         val file = File(applicationInfo.publicSourceDir)
         val size = file.length()
         Log.d("size_of_apk", humanReadableByteCountSI(size).toString())
+    }
+
+    fun getCSVData() {
+
+
+        var csvfile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/usage6") ,"cpu_usage.csv")
+
+        try {
+            val reader = com.opencsv.CSVReader(FileReader(csvfile))
+            var nextLine: Array<String>?
+
+                while (reader.readNext().also { nextLine = it } != null) {
+                    // nextLine[] is an array of values from the line
+
+                    if(nextLine?.size!! >= 19) {
+                        var cpuModel = CPUModel(
+                            nextLine?.get(0) ?: "",
+                            nextLine?.get(1).toString() ?: "",
+                            nextLine?.get(2) ?: "",
+                            nextLine?.get(3) ?: "",
+                            nextLine?.get(4) ?: "",
+                            nextLine?.get(5) ?: "",
+                            nextLine?.get(6) ?: "",
+                            nextLine?.get(7) ?: "",
+                            nextLine?.get(8) ?: "",
+                            nextLine?.get(9) ?: "",
+                            nextLine?.get(10) ?: "",
+                            nextLine?.get(11) ?: "",
+                            nextLine?.get(12) ?: "",
+                            nextLine?.get(13) ?: "",
+                            nextLine?.get(14) ?: "",
+                            nextLine?.get(15) ?: "",
+                            nextLine?.get(16) ?: "",
+                            nextLine?.get(17) ?: "",
+                            nextLine?.get(18) ?: "",
+                            nextLine?.get(19) ?: ""
+                        )
+
+                        if (!nextLine?.get(0).toString().equals("App")) {
+                            cpuList.add(cpuModel)
+                        }
+                    }
+                    Log.d("CDSDSDSD", nextLine?.get(0).toString() + (nextLine?.get(1) ?: 0) + "etc...")
+                }
+
+        } catch (e: IOException) {
+            Toast.makeText(this, "The specified file was not found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    fun getMemoryData() {
+        for(i in cpuList.indices)
+        {
+            Log.d("usedMemory----", cpuList.get(i).RES)
+        }
+
     }
 
     override fun onDestroy() {

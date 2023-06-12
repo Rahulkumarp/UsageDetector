@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dim_20dp">20dp</dimen>
+    <dimen name="dim_20sp">20sp</dimen>
+    <dimen name="dim_16dp">16dp</dimen>
+    <dimen name="sheet_txt">18sp</dimen>
+</resources>

@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.usagedetector.view.usagesheet.UserSheetViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <!--    <HorizontalScrollView-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:scrollbars="none">-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:id="@+id/main_linear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view_top">
+
+
+
+                        <LinearLayout
+                            android:id="@+id/data_linear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+
+                            <LinearLayout
+                                android:id="@+id/sno"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:text="S. No."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sheet_txt" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+
+                            <LinearLayout
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:text="Application"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sheet_txt" />
+
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_no"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:id="@+id/linear_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal"
+
+                                >
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_one"
+                                    android:layout_width="190dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/time_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:layout_marginBottom="2dp"
+                                        android:gravity="center"
+                                        android:text="Time &amp; Date"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/sep_one"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:id="@+id/linear_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_two"
+                                    android:layout_width="150dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/screnn_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+
+                                        android:text="screen Name"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_two"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:id="@+id/linear_three"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_three"
+                                    android:layout_width="70dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/idle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+
+                                        android:text="idle"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_three"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:id="@+id/linear_four"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_four"
+                                    android:layout_width="170dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/action_perfomed"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+
+                                        android:text="action Performed "
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_four"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+
+                            <LinearLayout
+                                android:id="@+id/linear_five"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_five"
+                                    android:layout_width="170dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/file_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+
+                                        android:text="file Name"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_five"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+
+                            <LinearLayout
+                                android:id="@+id/linear_six"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_six"
+                                    android:layout_width="90dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/line_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="Line no."
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_six"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+
+                            <LinearLayout
+                                android:id="@+id/linear_seven"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_seven"
+                                    android:layout_width="190dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/method"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="Method"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_seven"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:id="@+id/linear_eight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_eight"
+                                    android:layout_width="80dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/pid"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="PID"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:id="@+id/sep_eight"
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:id="@+id/linear_nine"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/cross_linear_nine"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/user"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="User"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="50dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/pr"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="PR"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="50dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/ni"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="NI"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/linear_virt"
+                                    android:layout_width="70dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/virt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="@string/virt"
+                                        android:textColor="@color/blue"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/linear_res"
+                                    android:layout_width="70dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/res"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="@string/res"
+                                        android:textColor="@color/blue"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/linear_shr"
+                                    android:layout_width="60dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/shr"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="@string/shr"
+                                        android:textColor="@color/blue"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/status"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="STATUS"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/linear_cpu"
+                                    android:layout_width="80dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/cpu_p"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="@string/cpu"
+                                        android:textColor="@color/blue"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/linear_mem"
+                                    android:layout_width="80dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/memory_p"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="@string/mem"
+                                        android:textColor="@color/blue"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/time_2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="TIME"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="170dp"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/args"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:text="ARGS"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/sheet_txt" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_sheet"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+
+
+
+
+        <!--    </HorizontalScrollView>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

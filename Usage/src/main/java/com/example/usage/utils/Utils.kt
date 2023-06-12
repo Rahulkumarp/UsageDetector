@@ -24,16 +24,29 @@ object Utils {
         return formattedDate
     }
 
-    fun setDataInContentProvider(context: Context,fileName: String, mime_type: String, folder : String) : OutputStream? {
+    fun setDataInContentProvider(
+        context: Context,
+        fileName: String,
+        mime_type: String,
+        folder: String
+    ): OutputStream? {
         var imageOutStream: OutputStream? = null
-        if (!File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/$folder") , fileName).exists()
+        if (!File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/$folder"),
+                fileName
+            ).exists()
+            && !Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/$folder")
+                .exists()
         ) {
 
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q){
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
                 val values = ContentValues().apply {
                     put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
                     put(MediaStore.Images.Media.MIME_TYPE, "csv")
-                    put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS+"/$folder")
+                    put(
+                        MediaStore.Images.Media.RELATIVE_PATH,
+                        Environment.DIRECTORY_DOCUMENTS + "/$folder"
+                    )
                 }
 
 
@@ -46,25 +59,54 @@ object Utils {
                 }
 
                 return imageOutStream!!
-            }else{
+            }
+        } else if (!File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/$folder"),
+                fileName
+            ).exists()
+            && Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/$folder")
+                .exists()
+        ) {
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/$folder")
+                .delete()
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+                val values = ContentValues().apply {
+                    put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+                    put(MediaStore.Images.Media.MIME_TYPE, "csv")
+                    put(
+                        MediaStore.Images.Media.RELATIVE_PATH,
+                        Environment.DIRECTORY_DOCUMENTS + "/$folder"
+                    )
+                }
 
-                val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).absolutePath
+
+                context.contentResolver.run {
+                    val uri = context.contentResolver.insert(
+                        MediaStore.Files.getContentUri("external"), values
+                    )
+                    imageOutStream = openOutputStream(uri!!)!!
+
+                }
+            } else {
+
+                val path =
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).absolutePath
                 val newPath = "$path/$folder"
                 val file = File(newPath)
                 file.mkdir()
-                val fileCreate = File(file,fileName)
+                val fileCreate = File(file, fileName)
                 fileCreate.createNewFile()
-                imageOutStream =   FileOutputStream(fileCreate,true)
+                imageOutStream = FileOutputStream(fileCreate, true)
                 return imageOutStream
 
             }
 
-        }else {
-            imageOutStream = FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).absolutePath +"/$folder"+"/$fileName")
+        } else {
+            imageOutStream =
+                FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).absolutePath + "/$folder" + "/$fileName")
             return imageOutStream
         }
+
+        return imageOutStream
     }
-
-
-
 }

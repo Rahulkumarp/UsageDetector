@@ -73,7 +73,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
             }
         }
 
-        var str = "${Utils.getDate()},$screenName,$isIdle ,$buttonName,$fileName, $lineName, $methodName,$usedHeapSizeInMB,$availHeapSizeInMB,$maxHeapSizeInMB,$usedNativeMemoryInMB,$availNativeMemoryFreeSize,$totalNativeMemorySize"
+        var str = "${Constants.appName},${Utils.getDate()},$screenName,$isIdle ,$buttonName,$fileName, $lineName, $methodName,$usedHeapSizeInMB,$availHeapSizeInMB,$maxHeapSizeInMB,$usedNativeMemoryInMB,$availNativeMemoryFreeSize,$totalNativeMemorySize"
         memPw.println(str)
 
 
@@ -96,7 +96,7 @@ open class MemoryUsageExporter(var context: Context) : AppMetric {
         outputStrem = Utils.setDataInContentProvider(context, MEM_USAGE_FILENAME,"csv",folder)
           if(outputStrem!=null) {
               memPw = PrintWriter(outputStrem, true)
-              var header = "Time, Screen Name, Idle, Action Performed, File Name, Line No., Method, Used Heap Size,Avail Heap Size, Max heap size, Used Native Memory, Avail Native MemoryFree,Total Native Memory"
+              var header = "App, Time, Screen Name, Idle, Action Performed, File Name, Line No., Method, Used Heap Size,Avail Heap Size, Max heap size, Used Native Memory, Avail Native MemoryFree,Total Native Memory"
               memPw.println(header)
           }
 

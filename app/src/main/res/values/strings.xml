@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">UsageDetector</string>
+    <string name="res"><u>RES</u></string>
+    <string name="shr"><u>SHR</u></string>
+    <string name="cpu"><u>CPU %</u></string>
+    <string name="mem"><u>MEM %</u></string>
+    <string name="virt"><u>VIRT</u></string>
 </resources>

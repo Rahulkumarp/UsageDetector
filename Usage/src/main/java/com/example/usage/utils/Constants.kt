@@ -4,5 +4,6 @@ class Constants {
     companion object{
         var idleMemoryUsage = false
         var idleCPUUsage = false
+        var appName = "Application Name"
     }
 }

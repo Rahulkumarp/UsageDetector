@@ -71,7 +71,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             CPU_USAGE_FILENAME,"txt",folder)
         if(outputStream!=null) {
             cpuPw = PrintWriter(outputStream, true)
-            cpuPw?.println("Time, Screen Name, Idle, Action Performed, File Name, Line No., Method,PID,USER,PR,NI,VIRT,RES,SHR,Status(S/R),[%CPU],%MEM,TIME+,ARGS")
+            cpuPw?.println("App, Time, Screen Name, Idle, Action Performed, File Name, Line No., Method,PID,USER,PR,NI,VIRT,RES,SHR,Status(S/R),[%CPU],%MEM,TIME+,ARGS")
 
         }
 
@@ -92,7 +92,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
                 .replace("    ", ",").replace("   ", ",").replace("  ", ",")
                 .replace(" ", ",").replace(",,", ",")
                 var data5 =
-                    " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine5"
+                    " ${Constants.appName},${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine5"
                 cpuPw?.println(data5)
 
         }
@@ -105,7 +105,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
                 .replace(" ",",").replace(",,",",")
 
 
-                var data6 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine6"
+                var data6 = " ${Constants.appName}, ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine6"
                 cpuPw?.println(data6)
             }
 
@@ -115,7 +115,7 @@ class CPUUsageExporter(var context: Context) : AppMetric {
             replace("   ",",").replace("  ",",")
             .replace(" ",",").replace(",,",",")
 
-            var data7 = " ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine7"
+            var data7 = " ${Constants.appName}, ${Utils.getDate()},$screenName, $isIdle,$buttonName,$fileName, $lineName, $methodName $processLine7"
             cpuPw?.println(data7)
         }
 
