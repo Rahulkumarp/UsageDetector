@@ -5,14 +5,16 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.util.Log
+import com.example.usage.`interface`.ApiInterface
 import com.example.usage.`interface`.AppMetric
 import com.example.usage.utils.Utils
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.PrintWriter
+import javax.inject.Inject
 
-class BetterUsageExporter(private val context: Context) : AppMetric {
+class BetterUsageExporter @Inject constructor(private val context: Context, val apiservice :  ApiInterface) : AppMetric {
 
     private companion object{
 
