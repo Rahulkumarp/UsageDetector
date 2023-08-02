@@ -1,13 +1,10 @@
 package com.example.usage.usage
 
 import android.annotation.SuppressLint
-import android.app.ActivityManager
-import android.app.ActivityManager.MemoryInfo
 import android.content.Context
 import android.os.Debug
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
-import com.example.usage.`interface`.AppMetric
+import com.example.usage.interfaceapp.AppMetric
 import com.example.usage.utils.Constants
 import com.example.usage.utils.Utils
 import java.io.OutputStream

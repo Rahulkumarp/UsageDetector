@@ -49,7 +49,13 @@ open class AppMetricExporter(context: Context) {
     fun createPathForFile(folder: String, appName : String)
     {
         Constants.appName = appName
+        Constants.folderName = folder
         exporters.forEach { it.setPath(folder) }
+    }
+
+    fun uploadFileOnServer(device: String, fileName: String, pathName: String, minInfo: String)
+    {
+
     }
 
 

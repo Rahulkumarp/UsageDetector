@@ -3,6 +3,7 @@ package com.example.usagedetector.view.usagesheet
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
+import com.example.usage.utils.Constants
 import com.example.usagedetector.model.CPUModel
 import java.io.File
 import java.io.FileReader
@@ -16,7 +17,7 @@ class UserSheetRepository @Inject constructor(){
 
 
         var cpuList  =  arrayListOf <CPUModel>()
-        var csvfile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/usage8") ,"cpu_usage.csv")
+        var csvfile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/"+ Constants.folderName) ,"cpu_usage.csv")
 
         try {
             val reader = com.opencsv.CSVReader(FileReader(csvfile))

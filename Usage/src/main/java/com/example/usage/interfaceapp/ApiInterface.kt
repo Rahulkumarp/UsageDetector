@@ -1,14 +1,11 @@
-package com.example.usage.`interface`
+package com.example.usage.interfaceapp
 
-import android.util.JsonReader
 import com.google.gson.JsonObject
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Query
 import java.lang.Exception
@@ -25,7 +22,7 @@ interface ApiInterface {
         @Query("pathName") pathName: String,
         @Query("minInfo") minInfo: String/*,
         @Body body: RequestBody*/
-    ): Response<JsonObject>
+    )
 
 
     companion object {
@@ -48,7 +45,7 @@ interface ApiInterface {
 //                .build()
 
             return Retrofit.Builder()
-                .baseUrl("baseUrl")
+                .baseUrl("https://eo")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

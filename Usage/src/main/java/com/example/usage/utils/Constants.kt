@@ -5,5 +5,6 @@ class Constants {
         var idleMemoryUsage = false
         var idleCPUUsage = false
         var appName = "Application Name"
+        var folderName = ""
     }
 }

@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         appMetricExporter = AppMetricExporter(this)
-        appMetricExporter.createPathForFile("usage8","Usage Deectot")
+        appMetricExporter.createPathForFile("usage9","Usage Deectot")
 
 
         button.setOnClickListener{
@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity() {
     fun getCSVData() {
 
 
-        var csvfile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/usage6") ,"cpu_usage.csv")
+        var csvfile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/usage8") ,"cpu_usage.csv")
 
         try {
             val reader = com.opencsv.CSVReader(FileReader(csvfile))
@@ -235,6 +235,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         appMetricExporter.stopCollect()
-
+        appMetricExporter.uploadFileOnServer("","","","")
     }
 }

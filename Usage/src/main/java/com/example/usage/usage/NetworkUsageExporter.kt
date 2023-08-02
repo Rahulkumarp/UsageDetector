@@ -3,8 +3,7 @@ package com.example.usage.usage
 import android.content.Context
 import android.net.TrafficStats
 import android.util.Log
-import com.example.usage.`interface`.AppMetric
-import com.example.usage.utils.Utils
+import com.example.usage.interfaceapp.AppMetric
 import java.io.File
 import java.io.FileOutputStream
 import java.io.PrintWriter

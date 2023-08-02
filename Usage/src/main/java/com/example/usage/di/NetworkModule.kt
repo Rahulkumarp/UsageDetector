@@ -17,7 +17,7 @@
 package com.example.usage.di
 
 
-import com.example.usage.`interface`.ApiInterface
+import com.example.usage.interfaceapp.ApiInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,17 +1,11 @@
 package com.example.usage.usage
 
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.Context
-import android.net.Uri
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
-import com.example.usage.`interface`.AppMetric
+import com.example.usage.interfaceapp.AppMetric
 import com.example.usage.utils.Constants
 import com.example.usage.utils.Utils
-import java.io.File
-import java.io.FileOutputStream
 import java.io.OutputStream
 import java.io.PrintWriter
 import kotlin.jvm.Throws
